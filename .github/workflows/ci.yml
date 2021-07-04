@@ -22,6 +22,10 @@ jobs:
         with:
           ruby-version: 2.7
 
+      - name: Install dependencies
+        run: |
+          sudo apt-get install libcurl4-openssl-dev
+
       - name: Rubocop
         run: |
           bin/setup
