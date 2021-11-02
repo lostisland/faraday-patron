@@ -4,8 +4,6 @@ module Faraday
   class Adapter
     # Patron adapter
     class Patron < Faraday::Adapter
-      dependency 'patron'
-
       def build_connection(env)
         session = ::Patron::Session.new
         @config_block&.call(session)
@@ -63,7 +61,7 @@ module Faraday
         raise Faraday::ConnectionFailed, e
       end
 
-      if loaded? && defined?(::Patron::Request::VALID_ACTIONS)
+      if defined?(::Patron::Request::VALID_ACTIONS)
         # HAX: helps but doesn't work completely
         # https://github.com/toland/patron/issues/34
         ::Patron::Request::VALID_ACTIONS.tap do |actions|
