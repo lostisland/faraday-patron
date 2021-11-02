@@ -9,8 +9,6 @@ Every adapter is defined into its own gem. This gem defines the adapter for Patr
 Add these lines to your application's Gemfile:
 
 ```ruby
-gem 'patron', '>= 2.2'
-gem 'faraday'
 gem 'faraday-patron'
 ```
 
@@ -20,8 +18,7 @@ And then execute:
 
 Or install them yourself as:
 
-    $ gem install patron -v '>= 2.2'
-    $ gem install faraday faraday-patron
+    $ gem install faraday-patron
 
 ## Usage
 

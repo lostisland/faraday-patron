@@ -3,9 +3,9 @@ name: CI
 on:
   pull_request:
   push:
-    branches: [main, setup-ci]
+    branches: [main]
   schedule:
-    - cron: '0 8 * * 1' # At 8:00 on Monday
+    - cron: '0 8 * * 1'
 
 env:
   GIT_COMMIT_SHA: ${{ github.sha }}
@@ -21,22 +21,20 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7
+          bundler-cache: true
 
       - name: Install dependencies
-        run: |
-          sudo apt-get install libcurl4-openssl-dev
+        run: sudo apt-get install libcurl4-openssl-dev
 
       - name: Rubocop
-        run: |
-          bin/setup
-          bin/ci-lint
+        run: bundle exec rubocop --format progress
 
   test:
     needs: [lint]
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby: ['2.5', '2.6', '2.7', '3.0']
+        ruby: ['2.6', '2.7', '3.0']
 
     steps:
       - uses: actions/checkout@v2
@@ -45,15 +43,10 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
 
       - name: Install dependencies
-        run: |
-          sudo apt-get install libcurl4-openssl-dev
-
-      - name: Build
-        run: |
-          bin/setup
+        run: sudo apt-get install libcurl4-openssl-dev
 
       - name: Test
-        run: |
-          bin/ci-test
+        run: bundle exec rspec
