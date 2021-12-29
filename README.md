@@ -22,15 +22,14 @@ Or install them yourself as:
 
 ## Usage
 
-Configure your Faraday connection to use this adapter like this:
-
 ```ruby
-connection = Faraday.new(url, conn_options) do |conn|
-  conn.adapter(:patron)
+conn = Faraday.new(...) do |f|
+  f.adapter :patron do |session|
+    # yields Patron::Session
+    session.max_redirects = 10
+  end
 end
 ```
-
-For more information on how to setup your Faraday connection and adapters usage, please refer to the [Faraday Website][faraday-website].
 
 ## Development
 
@@ -51,7 +50,6 @@ The gem is available as open source under the terms of the [license][license].
 Everyone interacting in the Faraday Patron adapter project's codebase, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct][code-of-conduct].
 
 [faraday]: https://github.com/lostisland/faraday
-[faraday-website]: https://lostisland.github.io/faraday
 [patron]: https://github.com/toland/patron
 [rubygems]: https://rubygems.org
 [repo]: https://github.com/lostisland/faraday-patron
