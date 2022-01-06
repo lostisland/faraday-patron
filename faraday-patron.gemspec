@@ -22,6 +22,5 @@ Gem::Specification.new do |spec|
   spec.files = Dir.glob('lib/**/*') + %w[README.md LICENSE.md]
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'faraday', '~> 2.0'
   spec.add_dependency 'patron', '>= 0.4.2'
 end

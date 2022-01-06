@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'faraday'
 require 'patron'
 require_relative 'adapter/patron'
 require_relative 'patron/version'
